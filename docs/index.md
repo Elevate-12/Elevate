@@ -68,7 +68,7 @@ python main.py
 
 ## Result
 * problem.txt: name of skills with problems
-* problem<x>.txt: name of skills with p<x>
+* problem<x\>.txt: name of skills with p<x\>
 
 
 ## Download
