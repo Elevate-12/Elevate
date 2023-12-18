@@ -1,1 +1,4 @@
-site_name: My Docs
+site_name: Elevate
+nav:
+    - Home: index.md
+    - Experiment: experiment.md
