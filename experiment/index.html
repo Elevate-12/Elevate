@@ -74,7 +74,11 @@
             
             <li class="nav-item" data-level="1"><a href="#experiment" class="nav-link">Experiment</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#study1-and-study2" class="nav-link">Study1 and Study2</a>
+            <li class="nav-item" data-level="2"><a href="#study1" class="nav-link">Study1</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#study2" class="nav-link">Study2</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -83,18 +87,6 @@
               </ul>
             </li>
             <li class="nav-item" data-level="2"><a href="#study4" class="nav-link">Study4</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#study5" class="nav-link">Study5</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#study6" class="nav-link">Study6</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#discussion" class="nav-link">Discussion</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -109,53 +101,39 @@
 <ul>
 <li>Download <a href="../tool/experiment.zip">experiment</a> to do experiments.</li>
 <li>The elevate_10min, gpt4_chatbot_10min, vitas_10min show the communication logs for Elevate, GPT4(chatbot) and Vitas to test skills for 10 minutes.</li>
-<li>The elevate12+vitas3_10min, elevate13+vitas2_10min, elevate23+vitas1_10min are for ablation studies.</li>
-<li>The elevate+llama2_10min and llama2_chatbot_10min are communication logs of Elevate+Llama2_13b and Llama2-13b(chatbot) respectively.</li>
-<li>The large_scale contains the communciation logs and problem lists of skills in large-scale dataset.</li>
+<li>The ablation1, ablation2, ablation are for ablation studies.</li>
+<li>The elevate+llama2-70b-chat-hf_10min and llama2-70b-chat-hf_chatbot_10min are communication logs of Elevate-Llama2-70b-chat and Llama2-70b-chat(chatbot) respectively.</li>
+<li>The large_scale contains the communciation logs of skills in large-scale dataset.</li>
 <li>The user contains the commucation logs of our user study.</li>
 <li>The experiment.py file is the source code to do experiments.</li>
 </ul>
-<h2 id="study1-and-study2">Study1 and Study2</h2>
-<p>Figure6-8 show the comparison of state space coverage between Elevate, GPT4(chatbot) and Vitas.
-Figure9-10 show the distribution of interaction rounds between Elevate and GPT4(chatbot), Elevate and Vitas respectively.
+<h2 id="study1">Study1</h2>
+<p>Figure 7 shows the comparison of sentence states and semantic states covered by Elevate, GPT4(chatbot) and Vitas.
+Figure 8 shows the average semantic state coverage rate with varying interaction rounds between Elevate and baselines.
 It is important to note that the results here show the communication logs of each tool testing 10 minutes.
-But in the study1 we compare the state space coverage of each tool testing for the same number of interaction rounds.</p>
-<p>To get the state coverage and efficiency achieved by Elevate and the baselines, run:</p>
+But in the study 1 we compare the semantic state coverage rate of each tool testing for the same number of interaction rounds.</p>
+<p>To get the semantic/sentence states and average semantic state coverage rate achieved by Elevate and the baselines, run:</p>
 <pre><code class="language-shell">python experiment.py 1
 </code></pre>
-<p>The result will be shown in <code>study1&amp;2_coverage_efficiency_gpt4_elevate.xlsx</code>, <code>study1&amp;2_coverage_efficiency_vitas_elevate.xlsx</code> and <code>study1&amp;2_coverage_efficiency_vitas_gpt4.xlsx</code>.</p>
+<p>The results will be shown in <code>study1_1_.xlsx</code> and <code>study1_2.xlsx</code>.</p>
+<h2 id="study2">Study2</h2>
+<p>Figure 9 shows the average semantic state coverage rate by Elevate, w/o States extraction, w/o Input events generation and w/o State space exploration.
+To get the raw data of the ablation study, run:</p>
+<pre><code class="language-shell">python experiment.py 2
+</code></pre>
+<p>The result will be shown in <code>study2.xlsx</code>.</p>
 <h2 id="study3">Study3</h2>
-<p>Table 5 show the number of problems detected by Elevate and the baselines.
-The problem lists are shown in the <code>result</code> directory.
-To get the problems detected by Elevate and the baselines, run:</p>
+<p>Figure 10 shows the average semantic state coverage rate achieved by Elevate-Llama2-70b-chat, Vitas and Llama2-70b-chat(chatbot).</p>
+<p>To get their state coverage rate on the benchmark, run:</p>
 <pre><code class="language-shell">python experiment.py 3
 </code></pre>
-<p>The result will be shown in <code>study3_problems.xlsx</code>.</p>
+<p>The result will be shown in <code>study3.xlsx</code>.</p>
 <h2 id="study4">Study4</h2>
-<p>Figure 11-13 show the comparison of state space coverage between Elevate and Elevate(<em>P<sub>input<sub></em>+<em>P<sub>explr<sub></em>), Elevate(<em>P<sub>state<sub></em>+<em>P<sub>explr<sub></em>) and Elevate(<em>P<sub>state<sub></em>+<em>P<sub>inputsub&gt;</em>).</p>
-<p>To get their state space coverage, run:</p>
+<p>Figure 11 shows the comparison of coverage rate achieved by Elevate and Vitas on 4000 skills from all categories.</p>
+<p>To get the coverage rate of Elevate and Vitas on these 4000 skills, run:</p>
 <pre><code class="language-shell">python experiment.py 4
 </code></pre>
-<p>The result will be shown in <code>study4.1_ablation_1.xlsx</code>, <code>study4.2_ablation_2.xlsx</code> and <code>study4.3_ablation_3.xlsx</code>.</p>
-<h2 id="study5">Study5</h2>
-<p>Figure 14 shows the comparison of state space coverage between Gavin+Llama2-13b and Llama-13b(chatbot).</p>
-<p>To get their state space coverage, run:</p>
-<pre><code class="language-shell">python experiment.py 5
-</code></pre>
-<p>The result will be shown in <code>study5_coverage_llama2_elevate.xlsx</code>.</p>
-<h2 id="study6">Study6</h2>
-<p>Table 6 shows the landscape of problems on the large-scale dataset.
-The problems are recorded in the <code>result</code> directory of each category's directory.
-To get the distribution of problems, run:</p>
-<pre><code class="language-shell">python experiment.py 6
-</code></pre>
-<p>The result will be shown in <code>study6_problems.xlsx</code>.</p>
-<h2 id="discussion">Discussion</h2>
-<p>Figure 15 shows the comparison of state space coverage between user, Elevate and Vitas.
-To get their state space coverage and the intersactions, run:</p>
-<pre><code class="language-shell">python experiment.py 7
-</code></pre>
-<p>The result will be shown in <code>discussion_coverage_user_vitas_elevate.xlsx</code>.</p></div>
+<p>The result will be shown in <code>study4.xlsx</code>.</p></div>
             </div>
         </div>
 

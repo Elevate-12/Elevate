@@ -86,10 +86,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#result" class="nav-link">Result</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
             <li class="nav-item" data-level="2"><a href="#download" class="nav-link">Download</a>
               <ul class="nav flex-column">
               </ul>
@@ -115,7 +111,7 @@
 │   └── util
 │       └── ...
 ├── chrome
-│   └── chromedriver_103
+│   └── chromedriver_new.exe
 ├── config
 │   └── config000.ini
 ├── cookie
@@ -123,14 +119,14 @@
 ├── corpus
 │   └── ...
 ├── dataset_2022
-│   ├── benchmark2022.xlsx
-│   └── large_scale.xlsx
+│   ├── benchmark.xlsx
+│   └── large_scale_4000.xlsx
 ├── README.md
 └── requirement.txt
 </code></pre>
 <ul>
 <li>code: contains the source code of Elevate</li>
-<li>chrome: contains the chromedriver with version 103</li>
+<li>chrome: contains the current chromedriver on windows (24th, March, 2024)</li>
 <li>config: configuration files.</li>
 <li>dataset_2022: benchmark skills and large-scale skills</li>
 <li>requirement.txt: requirements of python packages</li>
@@ -155,15 +151,10 @@ python main.py
     -i &lt;begin index of skill, default as 1&gt; 
     -ei &lt;end index of skill, default as 100&gt; 
     -c &lt;configuration file name in the config directory, default as config000.ini&gt; 
-    -e &lt;input skills file in the dataset_2022 directory, default as benchmark2022.xlsx&gt; 
-    -l &lt;path to save communication logs and results, default as ../../output/benchmark_elevate&gt; 
-    -d &lt;chromedriver name in the chrome directory, default as chromedriver_103&gt;
+    -e &lt;input skills file in the dataset_2022 directory, default as benchmark.xlsx&gt; 
+    -l &lt;path to save communication logs and results, default as ../../output/benchmark&gt; 
+    -d &lt;chromedriver name in the chrome directory, default as chromedriver_new.exe&gt;
 </code></pre>
-<h2 id="result">Result</h2>
-<ul>
-<li>problem.txt: name of skills with problems</li>
-<li>problem&lt;x&gt;.txt: name of skills with p&lt;x&gt;</li>
-</ul>
 <h2 id="download">Download</h2>
 <ul>
 <li><a href="tool/Elevate.zip">Elevate</a> See the Elevate directory for running Elevate. Dataset can also be found here.</li>
@@ -251,5 +242,5 @@ python main.py
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2023-12-18 06:23:49.127407+00:00
+Build Date UTC : 2024-03-24 09:13:08.663769+00:00
 -->
