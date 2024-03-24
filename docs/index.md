@@ -15,7 +15,7 @@
 │   └── util
 │       └── ...
 ├── chrome
-│   └── chromedriver_103
+│   └── chromedriver_new.exe
 ├── config
 │   └── config000.ini
 ├── cookie
@@ -23,14 +23,14 @@
 ├── corpus
 │   └── ...
 ├── dataset_2022
-│   ├── benchmark2022.xlsx
-│   └── large_scale.xlsx
+│   ├── benchmark.xlsx
+│   └── large_scale_4000.xlsx
 ├── README.md
 └── requirement.txt
 ```
 
 * code: contains the source code of Elevate
-* chrome: contains the chromedriver with version 103
+* chrome: contains the current chromedriver on windows (24th, March, 2024)
 * config: configuration files.
 * dataset_2022: benchmark skills and large-scale skills
 * requirement.txt: requirements of python packages
@@ -61,14 +61,10 @@ python main.py
     -i <begin index of skill, default as 1> 
     -ei <end index of skill, default as 100> 
     -c <configuration file name in the config directory, default as config000.ini> 
-    -e <input skills file in the dataset_2022 directory, default as benchmark2022.xlsx> 
-    -l <path to save communication logs and results, default as ../../output/benchmark_elevate> 
-    -d <chromedriver name in the chrome directory, default as chromedriver_103>
+    -e <input skills file in the dataset_2022 directory, default as benchmark.xlsx> 
+    -l <path to save communication logs and results, default as ../../output/benchmark> 
+    -d <chromedriver name in the chrome directory, default as chromedriver_new.exe>
 ```
-
-## Result
-* problem.txt: name of skills with problems
-* problem<x\>.txt: name of skills with p<x\>
 
 
 ## Download
