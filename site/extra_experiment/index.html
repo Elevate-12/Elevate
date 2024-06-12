@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Extra experiment - Elevate</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Elevate</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../experiment/" class="nav-link">Experiment</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Extra experiment</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../experiment/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#extra-experiment" class="nav-link">Extra Experiment</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#average-sentence-state-coverage-rate-with-interaction-rounds" class="nav-link">Average sentence state coverage rate with interaction rounds</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#average-semantic-state-coverage-rate-with-interaction-rounds-total-state-space-includes-states-of-manual-testing" class="nav-link">Average semantic state coverage rate with interaction rounds (total state space includes states of manual testing)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#problems-found-by-elevate-on-4000-skills" class="nav-link">Problems found by Elevate on 4000 skills</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#comparison-of-state-space-achieved-by-elevate-vitas-and-manual-testing" class="nav-link">Comparison of state space achieved by Elevate, Vitas and Manual testing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="extra-experiment">Extra Experiment</h1>
+<h2 id="average-sentence-state-coverage-rate-with-interaction-rounds">Average sentence state coverage rate with interaction rounds</h2>
+<p>In Study 1, we compare the average semantic state coverage rate with varying interaction rounds between Elevate and baselines. Semantic states are acquired by merging sentence states with similar functionalities or behavior. To show that Elevate performs better under different metrics, we compare the average <strong>sentence state</strong> coverage rate with varying interaction rounds between Elevate and baselines in this study. The total state space is set as the unique sentence states achieved by Elevate and baselines. The result is shown below.</p>
+<p><img alt="路径" src="../figure/study2_sentence.png" /></p>
+<p>Under the metric of sentence states, Elevate still achieves 10% higher average coverage rate than Vitas in a more efficient manner.</p>
+<h2 id="average-semantic-state-coverage-rate-with-interaction-rounds-total-state-space-includes-states-of-manual-testing">Average semantic state coverage rate with interaction rounds (total state space includes states of manual testing)</h2>
+<p>In Study 1, only the unique states achieved by Elevate and baselines form the total state space. We agree that manual testing results are significant in measuring the total state space when the ground truth is unknown. So we add <strong>the manual testing results to the total state space</strong> and compare the semantic state coverage rate with varying interaction rounds between Elevate and baselines. The results is shown below.</p>
+<p><img alt="路径" src="../figure/study2_user_as_gt.png" /></p>
+<p>When manual testing results are considered in the total state space, Elevage still achieves an average coverage rate of nearly 70%.</p>
+<h2 id="problems-found-by-elevate-on-4000-skills">Problems found by Elevate on 4000 skills</h2>
+<p>As summaried by Vitas, five common problems exist on VPA apps: unexpected exit, privacy violation, unable to exit, expected started apps and unavailable apps. Hence, Elevate supports checking these five problems while exploring VPA apps' behavior. The problems found on the large scale dataset by Elevate is shown below.</p>
+<table>
+<thead>
+<tr>
+<th>category</th>
+<th>apps with problems</th>
+<th>unexpected exit</th>
+<th>privacy violation</th>
+<th>unable to exit</th>
+<th>expected started apps</th>
+<th>unavailable apps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Business_Finance</td>
+<td>187</td>
+<td>121</td>
+<td>11</td>
+<td>13</td>
+<td>6</td>
+<td>55</td>
+</tr>
+<tr>
+<td>Connected_Car</td>
+<td>15</td>
+<td>5</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Education_Reference</td>
+<td>330</td>
+<td>209</td>
+<td>8</td>
+<td>8</td>
+<td>25</td>
+<td>105</td>
+</tr>
+<tr>
+<td>Food_Drink</td>
+<td>167</td>
+<td>123</td>
+<td>5</td>
+<td>7</td>
+<td>3</td>
+<td>39</td>
+</tr>
+<tr>
+<td>Games_Trivia</td>
+<td>453</td>
+<td>207</td>
+<td>7</td>
+<td>12</td>
+<td>27</td>
+<td>230</td>
+</tr>
+<tr>
+<td>Health_Fitness</td>
+<td>106</td>
+<td>62</td>
+<td>2</td>
+<td>0</td>
+<td>8</td>
+<td>39</td>
+</tr>
+<tr>
+<td>Kids</td>
+<td>161</td>
+<td>37</td>
+<td>1</td>
+<td>0</td>
+<td>14</td>
+<td>117</td>
+</tr>
+<tr>
+<td>Lifestyle</td>
+<td>334</td>
+<td>199</td>
+<td>10</td>
+<td>5</td>
+<td>18</td>
+<td>118</td>
+</tr>
+<tr>
+<td>Local</td>
+<td>17</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Movies_TV</td>
+<td>20</td>
+<td>11</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Music_Audio</td>
+<td>2</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>News</td>
+<td>132</td>
+<td>87</td>
+<td>0</td>
+<td>3</td>
+<td>6</td>
+<td>41</td>
+</tr>
+<tr>
+<td>Novelty_Humor</td>
+<td>600</td>
+<td>436</td>
+<td>7</td>
+<td>6</td>
+<td>29</td>
+<td>138</td>
+</tr>
+<tr>
+<td>Productivity</td>
+<td>158</td>
+<td>85</td>
+<td>7</td>
+<td>16</td>
+<td>9</td>
+<td>59</td>
+</tr>
+<tr>
+<td>Shopping</td>
+<td>55</td>
+<td>28</td>
+<td>4</td>
+<td>3</td>
+<td>1</td>
+<td>21</td>
+</tr>
+<tr>
+<td>Smart_Home</td>
+<td>346</td>
+<td>90</td>
+<td>2</td>
+<td>36</td>
+<td>9</td>
+<td>263</td>
+</tr>
+<tr>
+<td>Social</td>
+<td>171</td>
+<td>85</td>
+<td>5</td>
+<td>5</td>
+<td>14</td>
+<td>72</td>
+</tr>
+<tr>
+<td>Sports</td>
+<td>58</td>
+<td>22</td>
+<td>1</td>
+<td>0</td>
+<td>7</td>
+<td>30</td>
+</tr>
+<tr>
+<td>Travel_Transportation</td>
+<td>110</td>
+<td>61</td>
+<td>2</td>
+<td>7</td>
+<td>3</td>
+<td>44</td>
+</tr>
+<tr>
+<td>Utilities</td>
+<td>137</td>
+<td>81</td>
+<td>5</td>
+<td>7</td>
+<td>9</td>
+<td>47</td>
+</tr>
+<tr>
+<td>Weather</td>
+<td>72</td>
+<td>46</td>
+<td>3</td>
+<td>3</td>
+<td>4</td>
+<td>20</td>
+</tr>
+<tr>
+<td>Total</td>
+<td>3631</td>
+<td>2008</td>
+<td>81</td>
+<td>134</td>
+<td>194</td>
+<td>1460</td>
+</tr>
+</tbody>
+</table>
+<p>Surprisingly, 1654 skills (41.5%) are unavailable. Among the rest 2346 skills, most of them are detected with unexpected exit.</p>
+<h2 id="comparison-of-state-space-achieved-by-elevate-vitas-and-manual-testing">Comparison of state space achieved by Elevate, Vitas and Manual testing</h2>
+<p>To show the intersaction state space between Elevate, Vitas and Manual testing, we draw the venn diagram. The text on each part represents the state space coverage rate when the unique state space of Elevate, Vitas and Munual testing is set as the total space. The result is shown below.</p>
+<p><img alt="路径" src="../figure/user_elevate_vitas.png" /></p>
+<p>Compared with Vitas, Elevate covers more state space discovered by manual testing, which proves that Elevate is more effective in covering meaningful states and works more like a manual tester.</p>
+<p>To further explore the features of states achieved by Elevate and Vitas, we classify the states into two categories, they are meaningful states and error-handling states.
+Among them, meaningful states represent the behavior of skills providing normal service, while error-handling states represent skills failing to understand the user's inputs.
+Then, we manually classify the states achieved by Elevate and Vitas into meaningful or error-handling states, and draw two venn diagrams below.</p>
+<p><img alt="路径" src="../figure/meaningful.png" /></p>
+<p><img alt="路径" src="../figure/error_handling.png" /></p>
+<p>From these two figures, we can see that Elevate achieves more meaningful states than Vitas, while Vitas achieves more error-handling states than Elevate. It proves that input events generated by Elevate is more effective in exploring apps' functionalities.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

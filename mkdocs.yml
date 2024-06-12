@@ -2,3 +2,4 @@ site_name: Elevate
 nav:
     - Home: index.md
     - Experiment: experiment.md
+    - Extra experiment: extra_experiment.md
