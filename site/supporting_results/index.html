@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Extra experiment - Elevate</title>
+        <title>Supporting results - Elevate</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -37,7 +37,7 @@
                                 <a href="../experiment/" class="nav-link">Experiment</a>
                             </li>
                             <li class="navitem active">
-                                <a href="./" class="nav-link">Extra experiment</a>
+                                <a href="./" class="nav-link">Supporting results</a>
                             </li>
                         </ul>
 
@@ -75,7 +75,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#extra-experiment" class="nav-link">Extra Experiment</a>
+            <li class="nav-item" data-level="1"><a href="#supporting-results" class="nav-link">Supporting results</a>
               <ul class="nav flex-column">
             <li class="nav-item" data-level="2"><a href="#average-sentence-state-coverage-rate-with-interaction-rounds" class="nav-link">Average sentence state coverage rate with interaction rounds</a>
               <ul class="nav flex-column">
@@ -100,17 +100,24 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="extra-experiment">Extra Experiment</h1>
+<h1 id="supporting-results">Supporting results</h1>
 <h2 id="average-sentence-state-coverage-rate-with-interaction-rounds">Average sentence state coverage rate with interaction rounds</h2>
-<p>In Study 1, we compare the average semantic state coverage rate with varying interaction rounds between Elevate and baselines. Semantic states are acquired by merging sentence states with similar functionalities or behavior. To show that Elevate performs better under different metrics, we compare the average <strong>sentence state</strong> coverage rate with varying interaction rounds between Elevate and baselines in this study. The total state space is set as the unique sentence states achieved by Elevate and baselines. The result is shown below.</p>
+<p>In Study 1, we compare the average semantic state coverage rate with varying interaction rounds between Elevate and baselines. 
+Semantic states are acquired by merging sentence states with similar functionalities or behavior. 
+To demonstrate that Elevate outperforms baselines under different metrics, we compare the average <strong>sentence state</strong> coverage rate with varying interaction rounds in this study. 
+The total state space is set as the unique sentence states achieved by Elevate and baselines. 
+The result is shown below.</p>
 <p><img alt="路径" src="../figure/study2_sentence.png" /></p>
 <p>Under the metric of sentence states, Elevate still achieves 10% higher average coverage rate than Vitas in a more efficient manner.</p>
 <h2 id="average-semantic-state-coverage-rate-with-interaction-rounds-total-state-space-includes-states-of-manual-testing">Average semantic state coverage rate with interaction rounds (total state space includes states of manual testing)</h2>
-<p>In Study 1, only the unique states achieved by Elevate and baselines form the total state space. We agree that manual testing results are significant in measuring the total state space when the ground truth is unknown. So we add <strong>the manual testing results to the total state space</strong> and compare the semantic state coverage rate with varying interaction rounds between Elevate and baselines. The results is shown below.</p>
+<p>The total state space is set as the unique semantic states achieved by Elevate, Vitas, GPT-4(chatbot) and <strong>manual testing</strong>. 
+Then, the semantic state coverage rate with varying interaction rounds is compared between Elevate and baselines.
+The result is shown below.</p>
 <p><img alt="路径" src="../figure/study2_user_as_gt.png" /></p>
-<p>When manual testing results are considered in the total state space, Elevage still achieves an average coverage rate of nearly 70%.</p>
+<p>When manual testing results are considered in the total state space, Elevage still achieves an average coverage rate of nearly 70% and supasses baselines.</p>
 <h2 id="problems-found-by-elevate-on-4000-skills">Problems found by Elevate on 4000 skills</h2>
-<p>As summaried by Vitas, five common problems exist on VPA apps: unexpected exit, privacy violation, unable to exit, expected started apps and unavailable apps. Hence, Elevate supports checking these five problems while exploring VPA apps' behavior. The problems found on the large scale dataset by Elevate is shown below.</p>
+<p>As summaried by Vitas, five common problems exist on VPA apps: unexpected exit, privacy violation, unable to exit, expected started apps and unavailable apps. Hence, Elevate supports checking these five problems while exploring VPA apps' behavior. 
+The problems found on the large scale dataset by Elevate are shown below.</p>
 <table>
 <thead>
 <tr>
@@ -324,16 +331,20 @@
 </tr>
 </tbody>
 </table>
-<p>Surprisingly, 1654 skills (41.5%) are unavailable. Among the rest 2346 skills, most of them are detected with unexpected exit.</p>
+<p>Surprisingly, most of skills are detected with problems.
+A large number of them suffer from unexpected exit.</p>
 <h2 id="comparison-of-state-space-achieved-by-elevate-vitas-and-manual-testing">Comparison of state space achieved by Elevate, Vitas and Manual testing</h2>
-<p>To show the intersaction state space between Elevate, Vitas and Manual testing, we draw the venn diagram. The text on each part represents the state space coverage rate when the unique state space of Elevate, Vitas and Munual testing is set as the total space. The result is shown below.</p>
+<p>To show the intersection state space between Elevate, Vitas and Manual testing, we draw the venn diagram.
+The text on each part represents the state space coverage rate when the unique states achieved by Elevate, Vitas and Manual testing is set as the total space.
+The result is shown below.</p>
 <p><img alt="路径" src="../figure/user_elevate_vitas.png" /></p>
-<p>Compared with Vitas, Elevate covers more state space discovered by manual testing, which proves that Elevate is more effective in covering meaningful states and works more like a manual tester.</p>
-<p>To further analyze the characteristics of states achieved by Elevate and Vitas, we extract meaningful states, which represent the normal behavior of skills.
+<p>Compared with Vitas, Elevate covers more state space discovered by manual testing, which proves that Elevate works more like a manual tester.
+To further analyze the characteristics of states achieved by Elevate and Vitas, we extract meaningful states, which represent the normal behavior of skills.
 Meaningful states are extracted manually from the states achieved by Elevate and Vitas.
 The venn diagram of meaningful states coverage by Elevate and Vitas is shown below.</p>
 <p><img alt="路径" src="../figure/meaningful.png" /></p>
-<p>The figure demonstrate that Elevate achieves more meaningful states than Vitas. It proves that input events generated by Elevate is more effective in exploring apps' functionalities.</p></div>
+<p>The figure demonstrate that Elevate achieves more meaningful states than Vitas. 
+It proves that input events generated by Elevate are more effective in exploring apps' functionalities.</p></div>
             </div>
         </div>
 
