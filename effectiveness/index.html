@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Case study - Elevate</title>
+        <title>Effectiveness - Elevate</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -42,11 +42,11 @@
                             <li class="navitem">
                                 <a href="../coverage/" class="nav-link">Coverage metric</a>
                             </li>
-                            <li class="navitem">
-                                <a href="../effectiveness/" class="nav-link">Effectiveness</a>
-                            </li>
                             <li class="navitem active">
-                                <a href="./" class="nav-link">Case study</a>
+                                <a href="./" class="nav-link">Effectiveness</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../case_study/" class="nav-link">Case study</a>
                             </li>
                         </ul>
 
@@ -57,12 +57,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../effectiveness/" class="nav-link">
+                                <a rel="prev" href="../coverage/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../case_study/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -84,17 +84,13 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#case-study" class="nav-link">Case study</a>
+            <li class="nav-item" data-level="1"><a href="#effectiveness" class="nav-link">Effectiveness</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#case-1" class="nav-link">Case 1</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#case-2" class="nav-link">Case 2</a>
+            <li class="nav-item" data-level="2"><a href="#the-benifit-of-embedding-the-behavior-model-into-prompts" class="nav-link">The benifit of embedding the behavior model into prompts</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#case-3" class="nav-link">Case 3</a>
+            <li class="nav-item" data-level="2"><a href="#impact-of-llm-variance-on-elevate" class="nav-link">Impact of LLM variance on Elevate</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -105,85 +101,11 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="case-study">Case study</h1>
-<p>In this case study, we select three real world cases of VPA apps.
-Each of the cases demonstrates the effectiveness of Elevate's one agent.</p>
-<h2 id="case-1">Case 1</h2>
-<p>This is an Alexa skill called Action movies.
-The skill's main functionality is to recommend different movies.
-Here is a piece of communication logs between Action movies and Elevate.</p>
-<pre><code class="language-text">Skill: Ok, Here's Action movies.Welcome to action movies. Do you want me to tell you a movie?
-Elevate: help
-Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
-Elevate: yes
-...
-Skill: Welcome to action movies. Do you want me to tell you a movie?
-Elevate: no
-</code></pre>
-<p>Below shows the recording of <strong>Observer</strong>'s prompts and outputs related to the above communication log.
-Only *Short Prompt* is displayed.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: sentence: &quot;Do you want me to tell you a movie?&quot;, state list: ['&lt;START&gt;']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
-Short Prompt:
-    Input: sentence: &quot;Do you want me to recommend a movie?&quot;, state list: ['&lt;START&gt;', 'Do you want me to tell you a movie?']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
-</code></pre>
-<p>In this case, "Do you want me to tell you a movie?" and "Do you want me to recommend a movie?" are semantically similar outputs.
-Observer correctly maps the output "Do you want me to recommend a movie?" to an existing state "Do you want me to tell you a movie?".
-Therefore, Elevate recognizes the three skill's outputs as one state, so it uses different input events to efficiently trigger skill's different functionalities. </p>
-<h2 id="case-2">Case 2</h2>
-<p>This is an Alexa skill called Age Calculator.
-The skill's main functionality is to calculate the number of days between two dates.
-Here is a piece of communication logs between Age Calculator and Elevate.</p>
-<pre><code class="language-text">Skill: Handing off to Age Calculator by sayak.Age Calculator. You can ask me to calculate the amount of time between now and a specific date.What date would you like to use?
-Elevate: tommorrow
-Skill: The length of time between now and xxx is about xxx.
-...
-</code></pre>
-<p>Below shows the recording of <strong>Generator</strong>'s prompts and outputs related to the above communication log.
-Only *Short Prompt* is displayed.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: skill: &quot;What date would you like to use?&quot;
-    Output:
-Generator:
-    [&quot;today&quot;, &quot;tomorrow&quot;, &quot;July 4&quot;, &quot;December 25&quot;, &quot;next Monday&quot;]
-</code></pre>
-<p>The output "What date would you like to use?" expects a specifc date as inputs.
-Otherwise, this skill will return information like "I can only calculate based on exact dates.".
-Without domain-specifc knowledge of correct "date", invalid test cases will be generated.
-However, most NLP based testers have difficulty in generating valid test cases in such scenarios.
-As a comparison, Generator correctly generates five valid dates, benefited from the LLM.
-Therefore, Elevate's testing based on such high quality test cases is much more effective. </p>
-<h2 id="case-3">Case 3</h2>
-<p>This is an Alexa skill called Asthma Device Helper.
-The skill's main functionality is to provide usage instructions.
-Here is a piece of communication logs between Asthma Device Helper and Elevate.</p>
-<pre><code class="language-text">Skill: Welcome to Asthma Device Helper. You can ask a question like, what are the instructions for using a proair inhaler. ... Now, what can I help you with?
-Elevate: help
-Skill: You can ask questions such as, what's the instructions, or, you can say exit...Now, what can I help you with?
-Elevate: what are the instructions for using a proair inhaler
-Skill: When first using your proair inhaler...
-</code></pre>
-<p>Below shows the recording of <strong>Planner</strong>'s prompts and outputs related to the above communication log.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: &lt;current state&gt;=&quot;You can ask questions such as, what's the instructions, or, you can say exit...&quot;,FSM={Σ={&quot;what's the instructions&quot;:0,&quot;exit&quot;:0,&quot;what are the instructions for using a proair inhaler&quot;:0,&quot;help&quot;:1,&quot;pause&quot;:0,&quot;resume&quot;:0,&quot;stop&quot;:0,&quot;what's the time&quot;:0},δ=([&lt;current_state&gt;,&quot;help&quot;,&lt;current_state&gt;])}.
-    Thought:
-Planner:
-    ...
-    Output: &quot;what are the instructions for using a proair inhaler&quot;
-</code></pre>
-<p>The state "You can ask questions such as, what's the instructions, or, you can say exit..." has many candidate input events, including semantic relevant inputs like "what's the instructions", "what are the instructions for using a proair inhaler" and "help", and semantic irrelevant inputs like "exit", "pause", "stop", etc..
-Planner considers the semantic relevance, history invocation times and transitions to make exploration decisions.
-Consequently, semantic irrelevant inputs have lower priority.
-Among semantic relevant inputs, "help" was chosen once and is invalid, so it is removed.
-From the left two choices, Planner selects "what are the instructions for using a proair inhaler" as the final input.
-Without considering semantic relevance, "exit" will have the same priority as "what are the instructions for using a proair inhaler" and "what's the instructions".
-If "exit" is selected, the skill will terminate, affecting the testing continuity.</p></div>
+<h1 id="effectiveness">Effectiveness</h1>
+<h2 id="the-benifit-of-embedding-the-behavior-model-into-prompts">The benifit of embedding the behavior model into prompts</h2>
+<p><img alt="路径" src="../figure/fse3_gpt4_w_wo_bm.png" /></p>
+<h2 id="impact-of-llm-variance-on-elevate">Impact of LLM variance on Elevate</h2>
+<p><img alt="路径" src="../figure/fse4_diff_LLM_versions.png" /></p></div>
             </div>
         </div>
 
