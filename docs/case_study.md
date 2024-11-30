@@ -1,44 +1,103 @@
 # Case study
-In this case study, we select three real world cases of VPA apps.
-Each of the cases demonstrates the effectiveness of Elevate's one agent.
+In this case study, we select four real world cases of VPA apps.
+The first two cases reflect the effectiveness of Elevate's agent on problems detection and state space coverage.
+The last two cases show the limitation of Elevate.
 
 ## Case 1
+This is an Alexa skill called My Horoscope.
+The skill's main functionality is to show insights and forecasts.
+Here is a piece of communication log between My Horoscope and Elevate.
+
+```text
+...
+Skill: My Horoscope provides your daily horoscope along with insights into love, career, and money. For example, to get the horoscope for Capricorn, say, "Alexa, what is the horoscope for Capricorn?". To change your default sign, say, "Alexa, change my default zodiac sign.". Which zodiac sign your need the horoscope for?
+Elevate: alexa, change my default zodiac sign.
+Skill: Which zodiac sign do you want to set as default?
+Elevate: aries
+Skill: Oh an Aries, a beautiful sign for a beautiful soul....Would you like to start your sevenday free trial?
+Elevate: yes
+Alexa: Sorry, I am unable to fulfill your request on this device. <unexpected exit>
+```
+
+This is the corresponding communication log between My Horoscope and Vitas.
+
+```text
+...
+Skill: My Horoscope provides your daily horoscope along with insights into love, career, and money. For example, to get the horoscope for Capricorn, say, "Alexa, what is the horoscope for Capricorn?". To change your default sign, say, "Alexa, change my default zodiac sign.". Which zodiac sign your need the horoscope for?
+Vitas: change my default zodiac sign.
+Skill: Which zodiac sign do you want to set as default?
+Vitas: transform
+Skill: Sorry. I missed that....What sign do you want the horoscope for?
+Vitas: confidence
+Skill: Sorry. I missed that....What sign do you want the horoscope for?
+Vitas: transform
+Skill: Sorry. I missed that....What sign do you want the horoscope for?
+Vitas: reinforces
+Skill: Sorry. I missed that....What sign do you want the horoscope for?
+...
+```
+
+In this case, Vitas stucks on the state "What sign do you want the horoscope for?" because it cannot generate context-related inputs.
+Consequently, Vitas cannot discover new states or problems after that.
+As a comparison, the **Generator** agent generates several context-related inputs (["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]) for this state , and the new state "Would you like to start your sevenday free trial?" is discovered.
+After that, the unexpected exit problem is found.
+
+## Case 2
 This is an Alexa skill called Action movies.
 The skill's main functionality is to recommend different movies.
 Here is a piece of communication logs between Action movies and Elevate.
 
 ```text
-Skill: Ok, Here's Action movies.Welcome to action movies. Do you want me to tell you a movie?
-Elevate: help
+...
 Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
 Elevate: yes
-...
-Skill: Welcome to action movies. Do you want me to tell you a movie?
-Elevate: no
+Skill: Terminator. I tell you another movie.
+Elevate: yes
+Skill: Terminator. I tell you another movie.
+Elevate: action
+Skill: James Bond. I tell you another one.
+Elevate: title
+Alexa: I missed something. Can you say it again. <unexpected exit>
 ```
 
-Below shows the recording of **Observer**'s prompts and outputs related to the above communication log.
-Only \*Short Prompt\* is displayed.
+This is the corresponding communication log between Action movies and Vitas.
 
 ```text
-Short Prompt:
-    Input: sentence: "Do you want me to tell you a movie?", state list: ['<START>']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
-Short Prompt:
-    Input: sentence: "Do you want me to recommend a movie?", state list: ['<START>', 'Do you want me to tell you a movie?']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
+...
+Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
+Vitas: recommend a movie answering yes
+Skill: Black Panther. I tell you another movie.
+Vitas: recommend a movie answering yes
+Skill: Rambo. I tell you another one.
+Vitas: no
+Skill: Bye.
+<Skill exits normally>
+
+...
+Skill: Total Recall. I tell you another movie.
+Vitas: recommend a movie answering yes
+Skill: Die Hard. I tell you another one.
+...
 ```
 
-In this case, "Do you want me to tell you a movie?" and "Do you want me to recommend a movie?" are semantically similar outputs.
-Observer correctly maps the output "Do you want me to recommend a movie?" to an existing state "Do you want me to tell you a movie?".
-Therefore, Elevate recognizes the three skill's outputs as one state, so it uses different input events to efficiently trigger skill's different functionalities. 
+In this case, **Observer** merges "I tell you another movie." and "I tell you another one" as the same semantic state.
+**Planner** learns from the behavior model that the inputs "yes" and "action" cannot help discover new states or new problems.
+Also, **Planner** understands the potential results of the input "no", which is to end the communication.
+Finally, it chose "title" as input when visiting the same state the third times.
+After that, a new unexpected exit problem is found.
+As a comparison, Vitas considered "I tell you another movie." and "I tell you another one" as two different states.
+So "recommend a movie answering yes" was considered as a good input as it helped discover new states.
+We can see from the log that "recommend a movie answering yes" was chosen three times, which means that the same functionality was tested three times.
+Despite that, Vitas chose the input without considering semantic relevance.
+That is the reason why it chose "no" as the input and the communication ended.
 
+This case proves our assumptions.
+Firstly, ignoring sematic relevance when extracting states will affect the testing efficiency.
+This is the motivation of designing **Observer**.
+Secondly, semantic relevance is important when choosing inputs.
+This drawback is handled by **Planner**, who considers context-relevance and history testing results when making testing decisions. 
 
-## Case 2
+## Case 3
 This is an Alexa skill called Age Calculator.
 The skill's main functionality is to calculate the number of days between two dates.
 Here is a piece of communication logs between Age Calculator and Elevate.
@@ -67,35 +126,3 @@ Without domain-specifc knowledge of correct "date", invalid test cases will be g
 However, most NLP based testers have difficulty in generating valid test cases in such scenarios.
 As a comparison, Generator correctly generates five valid dates, benefited from the LLM.
 Therefore, Elevate's testing based on such high quality test cases is much more effective. 
-
-## Case 3
-This is an Alexa skill called Asthma Device Helper.
-The skill's main functionality is to provide usage instructions.
-Here is a piece of communication logs between Asthma Device Helper and Elevate.
-
-```text
-Skill: Welcome to Asthma Device Helper. You can ask a question like, what are the instructions for using a proair inhaler. ... Now, what can I help you with?
-Elevate: help
-Skill: You can ask questions such as, what's the instructions, or, you can say exit...Now, what can I help you with?
-Elevate: what are the instructions for using a proair inhaler
-Skill: When first using your proair inhaler...
-```
-
-Below shows the recording of **Planner**'s prompts and outputs related to the above communication log.
-
-```text
-Short Prompt:
-    Input: <current state>="You can ask questions such as, what's the instructions, or, you can say exit...",FSM={Σ={"what's the instructions":0,"exit":0,"what are the instructions for using a proair inhaler":0,"help":1,"pause":0,"resume":0,"stop":0,"what's the time":0},δ=([<current_state>,"help",<current_state>])}.
-    Thought:
-Planner:
-    ...
-    Output: "what are the instructions for using a proair inhaler"
-```
-
-The state "You can ask questions such as, what's the instructions, or, you can say exit..." has many candidate input events, including semantic relevant inputs like "what's the instructions", "what are the instructions for using a proair inhaler" and "help", and semantic irrelevant inputs like "exit", "pause", "stop", etc..
-Planner considers the semantic relevance, history invocation times and transitions to make exploration decisions.
-Consequently, semantic irrelevant inputs have lower priority.
-Among semantic relevant inputs, "help" was chosen once and is invalid, so it is removed.
-From the left two choices, Planner selects "what are the instructions for using a proair inhaler" as the final input.
-Without considering semantic relevance, "exit" will have the same priority as "what are the instructions for using a proair inhaler" and "what's the instructions".
-If "exit" is selected, the skill will terminate, affecting the testing continuity.
