@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Supporting results - Elevate</title>
+        <title>Weaknesses - Elevate</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -37,7 +37,13 @@
                                 <a href="../experiment/" class="nav-link">Experiment</a>
                             </li>
                             <li class="navitem active">
-                                <a href="./" class="nav-link">Supporting results</a>
+                                <a href="./" class="nav-link">Weaknesses</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../coverage/" class="nav-link">Coverage metric</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../effectiveness/" class="nav-link">Effectiveness</a>
                             </li>
                             <li class="navitem">
                                 <a href="../case_study/" class="nav-link">Case study</a>
@@ -56,7 +62,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../case_study/" class="nav-link">
+                                <a rel="next" href="../coverage/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -78,21 +84,17 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#supporting-results" class="nav-link">Supporting results</a>
+            <li class="nav-item" data-level="1"><a href="#weaknesses" class="nav-link">Weaknesses</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#average-sentence-state-coverage-rate-with-interaction-rounds" class="nav-link">Average sentence state coverage rate with interaction rounds</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#average-semantic-state-coverage-rate-with-interaction-rounds-total-state-space-includes-states-of-manual-testing" class="nav-link">Average semantic state coverage rate with interaction rounds (total state space includes states of manual testing)</a>
+            <li class="nav-item" data-level="2"><a href="#number-of-weaknesses-detected-by-elevate-and-vitas-on-the-benchmark" class="nav-link">Number of weaknesses detected by Elevate and Vitas on the benchmark</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#problems-found-by-elevate-on-4000-skills" class="nav-link">Problems found by Elevate on 4000 skills</a>
+            <li class="nav-item" data-level="2"><a href="#weaknesses-found-by-elevate-on-4000-skills" class="nav-link">Weaknesses found by Elevate on 4000 skills</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#comparison-of-state-space-achieved-by-elevate-vitas-and-manual-testing" class="nav-link">Comparison of state space achieved by Elevate, Vitas and Manual testing</a>
+            <li class="nav-item" data-level="2"><a href="#applicability-on-top-real-world-apps" class="nav-link">Applicability on top real-world apps</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -103,29 +105,32 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="supporting-results">Supporting results</h1>
-<h2 id="average-sentence-state-coverage-rate-with-interaction-rounds">Average sentence state coverage rate with interaction rounds</h2>
-<p>In Study 1, we compare the average semantic state coverage rate with varying interaction rounds between Elevate and baselines. 
-Semantic states are acquired by merging sentence states with similar functionalities or behavior. 
-To demonstrate that Elevate outperforms baselines under different metrics, we compare the average <strong>sentence state</strong> coverage rate with varying interaction rounds in this study. 
-The total state space is set as the unique sentence states achieved by Elevate and baselines. 
-The result is shown below.</p>
-<p><img alt="路径" src="../figure/study2_sentence.png" /></p>
-<p>Under the metric of sentence states, Elevate still achieves 10% higher average coverage rate than Vitas in a more efficient manner.</p>
-<h2 id="average-semantic-state-coverage-rate-with-interaction-rounds-total-state-space-includes-states-of-manual-testing">Average semantic state coverage rate with interaction rounds (total state space includes states of manual testing)</h2>
-<p>The total state space is set as the unique semantic states achieved by Elevate, Vitas, GPT-4(chatbot) and <strong>manual testing</strong>. 
-Then, the semantic state coverage rate with varying interaction rounds is compared between Elevate and baselines.
-The result is shown below.</p>
-<p><img alt="路径" src="../figure/study2_user_as_gt.png" /></p>
-<p>When manual testing results are considered in the total state space, Elevage still achieves an average coverage rate of nearly 70% and supasses baselines.</p>
-<h2 id="problems-found-by-elevate-on-4000-skills">Problems found by Elevate on 4000 skills</h2>
-<p>As summaried by Vitas, five common problems exist on VPA apps: unexpected exit, privacy violation, unable to exit, expected started apps and unavailable apps. Hence, Elevate supports checking these five problems while exploring VPA apps' behavior. 
-The problems found on the large scale dataset by Elevate are shown below.</p>
+<h1 id="weaknesses">Weaknesses</h1>
+<h2 id="number-of-weaknesses-detected-by-elevate-and-vitas-on-the-benchmark">Number of weaknesses detected by Elevate and Vitas on the benchmark</h2>
+<p>The benchmark contains available and stable Alexa skills.
+However, they also suffer from problems including unexpected exit, privacy violation and unstoppable problems.
+While Elevate and baselines tested these skills, they recorded these problems.
+The number of weaknesses found by Elevate and baselines with time is shown below.</p>
+<p><img alt="路径" src="../figure/fse1_weakness_vs_time.png" /></p>
+<p>The number of weaknesses detected with time is proportional to the increase of the state space with interaction rounds.
+We notice that weaknesses found by Elevate are fewer than baselines in the first two minutes.
+The reason is that Generator tends to generate meaningful inputs and Planner prefers to choose the context-related input, which are closer to natural language (see <a href="../coverage/#analyze-the-feature-of-state-space-achieved-by-elevate-vitas-and-manual-testing">coverage features</a>).
+These context-related inputs help us dig out skills' deeper behavior.
+After multiple rounds of effective interactions, Elevate can find more hidden problems.</p>
+<p>As a comparison, the inputs chose by baselines lack context relavance or the natural language format.
+As skills have difficulty understanding these inputs, they are more likely to expose problems.
+However, as these inputs cannot help find deeper functionalities, baselines continue to discover shallow problems repeatly.
+What's more, as users rarely deliberately say strange words during use, problems found by baselines are less likely to happen in practice.</p>
+<h2 id="weaknesses-found-by-elevate-on-4000-skills">Weaknesses found by Elevate on 4000 skills</h2>
+<p>Vitas summarized five common problems on VPA apps: unexpected exit, privacy violation, unable to exit, expected started apps and unavailable apps.
+Elevate supports checking these problems while exploring VPA apps' behavior.</p>
+<p>To show Elevate's applicability on real-world apps, Elevate tested the 4000 skills in the large-scale dataset.
+The information of these 4000 skills comes from Vitas's benchmark, but the skills under test is the latest version on the Alexa skill store.
+The number of apps with various problems found by Elevate is shown below.</p>
 <table>
 <thead>
 <tr>
 <th>category</th>
-<th>apps with problems</th>
 <th>unexpected exit</th>
 <th>privacy violation</th>
 <th>unable to exit</th>
@@ -136,7 +141,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 <tbody>
 <tr>
 <td>Business_Finance</td>
-<td>187</td>
 <td>121</td>
 <td>11</td>
 <td>13</td>
@@ -145,7 +149,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Connected_Car</td>
-<td>15</td>
 <td>5</td>
 <td>1</td>
 <td>2</td>
@@ -154,7 +157,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Education_Reference</td>
-<td>330</td>
 <td>209</td>
 <td>8</td>
 <td>8</td>
@@ -163,7 +165,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Food_Drink</td>
-<td>167</td>
 <td>123</td>
 <td>5</td>
 <td>7</td>
@@ -172,7 +173,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Games_Trivia</td>
-<td>453</td>
 <td>207</td>
 <td>7</td>
 <td>12</td>
@@ -181,7 +181,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Health_Fitness</td>
-<td>106</td>
 <td>62</td>
 <td>2</td>
 <td>0</td>
@@ -190,7 +189,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Kids</td>
-<td>161</td>
 <td>37</td>
 <td>1</td>
 <td>0</td>
@@ -199,7 +197,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Lifestyle</td>
-<td>334</td>
 <td>199</td>
 <td>10</td>
 <td>5</td>
@@ -208,7 +205,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Local</td>
-<td>17</td>
 <td>11</td>
 <td>0</td>
 <td>0</td>
@@ -217,7 +213,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Movies_TV</td>
-<td>20</td>
 <td>11</td>
 <td>0</td>
 <td>1</td>
@@ -227,7 +222,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 <tr>
 <td>Music_Audio</td>
 <td>2</td>
-<td>2</td>
 <td>0</td>
 <td>0</td>
 <td>0</td>
@@ -235,7 +229,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>News</td>
-<td>132</td>
 <td>87</td>
 <td>0</td>
 <td>3</td>
@@ -244,7 +237,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Novelty_Humor</td>
-<td>600</td>
 <td>436</td>
 <td>7</td>
 <td>6</td>
@@ -253,7 +245,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Productivity</td>
-<td>158</td>
 <td>85</td>
 <td>7</td>
 <td>16</td>
@@ -262,7 +253,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Shopping</td>
-<td>55</td>
 <td>28</td>
 <td>4</td>
 <td>3</td>
@@ -271,7 +261,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Smart_Home</td>
-<td>346</td>
 <td>90</td>
 <td>2</td>
 <td>36</td>
@@ -280,7 +269,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Social</td>
-<td>171</td>
 <td>85</td>
 <td>5</td>
 <td>5</td>
@@ -289,7 +277,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Sports</td>
-<td>58</td>
 <td>22</td>
 <td>1</td>
 <td>0</td>
@@ -297,17 +284,15 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 <td>30</td>
 </tr>
 <tr>
-<td>Travel_Transportation</td>
-<td>110</td>
-<td>61</td>
+<td>Travel_Transportation  61</td>
 <td>2</td>
 <td>7</td>
 <td>3</td>
 <td>44</td>
+<td></td>
 </tr>
 <tr>
 <td>Utilities</td>
-<td>137</td>
 <td>81</td>
 <td>5</td>
 <td>7</td>
@@ -316,7 +301,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Weather</td>
-<td>72</td>
 <td>46</td>
 <td>3</td>
 <td>3</td>
@@ -325,7 +309,6 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tr>
 <tr>
 <td>Total</td>
-<td>3631</td>
 <td>2008</td>
 <td>81</td>
 <td>134</td>
@@ -335,19 +318,39 @@ The problems found on the large scale dataset by Elevate are shown below.</p>
 </tbody>
 </table>
 <p>Surprisingly, most of skills are detected with problems.
-A large number of them suffer from unexpected exit.</p>
-<h2 id="comparison-of-state-space-achieved-by-elevate-vitas-and-manual-testing">Comparison of state space achieved by Elevate, Vitas and Manual testing</h2>
-<p>To show the intersection state space between Elevate, Vitas and Manual testing, we draw the venn diagram.
-The text on each part represents the state space coverage rate when the unique states achieved by Elevate, Vitas and Manual testing is set as the total space.
-The result is shown below.</p>
-<p><img alt="路径" src="../figure/user_elevate_vitas.png" /></p>
-<p>Compared with Vitas, Elevate covers more state space discovered by manual testing, which proves that Elevate works more like a manual tester.
-To further analyze the characteristics of states achieved by Elevate and Vitas, we extract meaningful states, which represent the normal behavior of skills.
-Meaningful states are extracted manually from the states achieved by Elevate and Vitas.
-The venn diagram of meaningful states coverage by Elevate and Vitas is shown below.</p>
-<p><img alt="路径" src="../figure/meaningful.png" /></p>
-<p>The figure demonstrate that Elevate achieves more meaningful states than Vitas. 
-It proves that input events generated by Elevate are more effective in exploring apps' functionalities.</p></div>
+The problems found by Elevate cover those discovered by Vitas.
+In addition, Elevate found over a half of skills suffer from unexpected exit.
+Approximately 2% of skills have privacy violation issues.</p>
+<h2 id="applicability-on-top-real-world-apps">Applicability on top real-world apps</h2>
+<p>To further prove that our method has applicability and generality, we choose the top 60 skills with most rating number (util February, 2024).
+The below table shows the number of real-world apps with problems found by Elevate.</p>
+<table>
+<thead>
+<tr>
+<th>problem type</th>
+<th>unexpected exit</th>
+<th>privacy violation</th>
+<th>unable to exit</th>
+<th>expected started apps</th>
+<th>unavailable apps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>number</td>
+<td>36</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>14</td>
+</tr>
+</tbody>
+</table>
+<p>The result shows that Elevate found at least 59.0% of apps with unexpected exit and 3.3% of apps with privacy violation.
+Even apps with a large number of users suffer from various problems.
+This finding not only proves the applicability of Elevate, but also draws our attention to the quality of VPA apps.</p>
+<p>Besides, there are 31.1% of apps that cannot be correctly visited, including expected started apps and unavailable apps.
+Skills' iteration is quite fast as almost one-third of apps cannot launch within ten months.</p></div>
             </div>
         </div>
 

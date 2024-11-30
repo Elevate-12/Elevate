@@ -4,23 +4,23 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="None">
         
         
-        <link rel="shortcut icon" href="img/favicon.ico">
-        <title>Elevate</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/font-awesome.min.css" rel="stylesheet">
-        <link href="css/base.css" rel="stylesheet">
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Effectiveness - Elevate</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
         <script>hljs.highlightAll();</script> 
     </head>
 
-    <body class="homepage">
+    <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">Elevate</a>
+                <a class="navbar-brand" href="..">Elevate</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
                     <span class="navbar-toggler-icon"></span>
@@ -30,23 +30,23 @@
                 <div id="navbar-collapse" class="navbar-collapse collapse">
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../experiment/" class="nav-link">Experiment</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../weaknesses/" class="nav-link">Weaknesses</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../coverage/" class="nav-link">Coverage metric</a>
+                            </li>
                             <li class="navitem active">
-                                <a href="." class="nav-link">Home</a>
+                                <a href="./" class="nav-link">Effectiveness</a>
                             </li>
                             <li class="navitem">
-                                <a href="experiment/" class="nav-link">Experiment</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="weaknesses/" class="nav-link">Weaknesses</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="coverage/" class="nav-link">Coverage metric</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="effectiveness/" class="nav-link">Effectiveness</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="case_study/" class="nav-link">Case study</a>
+                                <a href="../case_study/" class="nav-link">Case study</a>
                             </li>
                         </ul>
 
@@ -57,12 +57,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" class="nav-link disabled">
+                                <a rel="prev" href="../coverage/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="experiment/" class="nav-link">
+                                <a rel="next" href="../case_study/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -84,21 +84,13 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#elevate-model-enhanced-llm-driven-vui-testing-on-vpa-apps" class="nav-link">Elevate: model-enhanced LLM driven VUI testing on VPA apps</a>
+            <li class="nav-item" data-level="1"><a href="#effectiveness" class="nav-link">Effectiveness</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#files-tree" class="nav-link">Files Tree</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#requirement" class="nav-link">Requirement</a>
+            <li class="nav-item" data-level="2"><a href="#the-benifit-of-embedding-the-behavior-model-into-prompts" class="nav-link">The benifit of embedding the behavior model into prompts</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#how-to-run-elevate" class="nav-link">How to run Elevate</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#download" class="nav-link">Download</a>
+            <li class="nav-item" data-level="2"><a href="#impact-of-llm-variance-on-elevate" class="nav-link">Impact of LLM variance on Elevate</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -109,69 +101,11 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="elevate-model-enhanced-llm-driven-vui-testing-on-vpa-apps">Elevate: model-enhanced LLM driven VUI testing on VPA apps</h1>
-<h2 id="files-tree">Files Tree</h2>
-<pre><code class="language-text">├── code
-│   ├── main.py
-│   ├── step1_process_document.py
-│   ├── step2_test_skill.py
-│   ├── step3_detect_problem.py
-│   ├── model
-│   │   └── ...
-│   ├── skill
-│   │   └── ...
-│   └── util
-│       └── ...
-├── chrome
-│   └── chromedriver_new.exe
-├── config
-│   └── config000.ini
-├── cookie
-│   └── ...
-├── corpus
-│   └── ...
-├── dataset_2022
-│   ├── benchmark.xlsx
-│   └── large_scale_4000.xlsx
-├── README.md
-└── requirement.txt
-</code></pre>
-<ul>
-<li>code: contains the source code of Elevate</li>
-<li>chrome: contains the current chromedriver on windows (24th, March, 2024)</li>
-<li>config: configuration files.</li>
-<li>dataset_2022: benchmark skills and large-scale skills</li>
-<li>requirement.txt: requirements of python packages</li>
-</ul>
-<h2 id="requirement">Requirement</h2>
-<h3 id="python-package">python package</h3>
-<p><code>pip install -r requirement.txt</code></p>
-<p><code>python -m spacy download en_core_web_sm</code></p>
-<h3 id="environment">environment</h3>
-<p><code>export OPENAI_API_KEY=&lt;YOUR OPENAI API KEY&gt;</code></p>
-<h3 id="other">Other</h3>
-<ol>
-<li>the <strong>chromedriver</strong> that matches your chrome version</li>
-<li>an <strong>amazon developer account</strong> that can use the simulator (change the config000.ini in config directory to add your acount)</li>
-<li>an <strong>Azure account</strong> that can access to the openAI API (change the config000.ini in config directory to add the apibase and apiversion)</li>
-<li>We need to login to the amazon developer account to start using the simulator. In most of the cases amazon will send an email to your linked email address for verifications. We use pop to read the emails, so make sure the <strong>110 port</strong> is open.</li>
-</ol>
-<h2 id="how-to-run-elevate">How to run Elevate</h2>
-<pre><code>cd code
-
-python main.py 
-    -i &lt;begin index of skill, default as 1&gt; 
-    -ei &lt;end index of skill, default as 100&gt; 
-    -c &lt;configuration file name in the config directory, default as config000.ini&gt; 
-    -e &lt;input skills file in the dataset_2022 directory, default as benchmark.xlsx&gt; 
-    -l &lt;path to save communication logs and results, default as ../../output/benchmark&gt; 
-    -d &lt;chromedriver name in the chrome directory, default as chromedriver_new.exe&gt;
-</code></pre>
-<h2 id="download">Download</h2>
-<ul>
-<li><a href="tool/Elevate.zip">Elevate</a> See the Elevate directory for running Elevate. Dataset can also be found here.</li>
-<li><a href="tool/experiment.zip">Output &amp; Experiment</a> The data for experiments can all be found here. Approaches to run the experiments can be found <a href="experiment/">here</a>.</li>
-</ul></div>
+<h1 id="effectiveness">Effectiveness</h1>
+<h2 id="the-benifit-of-embedding-the-behavior-model-into-prompts">The benifit of embedding the behavior model into prompts</h2>
+<p><img alt="路径" src="../figure/fse3_gpt4_w_wo_bm.png" /></p>
+<h2 id="impact-of-llm-variance-on-elevate">Impact of LLM variance on Elevate</h2>
+<p><img alt="路径" src="../figure/fse4_diff_LLM_versions.png" /></p></div>
             </div>
         </div>
 
@@ -179,14 +113,14 @@ python main.py
             <hr>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
-        <script src="js/jquery-3.6.0.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="../js/jquery-3.6.0.min.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
         <script>
-            var base_url = ".",
+            var base_url = "..",
                 shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
         </script>
-        <script src="js/base.js"></script>
-        <script src="search/main.js"></script>
+        <script src="../js/base.js"></script>
+        <script src="../search/main.js"></script>
 
         <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -251,8 +185,3 @@ python main.py
 
     </body>
 </html>
-
-<!--
-MkDocs version : 1.5.3
-Build Date UTC : 2024-11-30 07:54:00.728289+00:00
--->

@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Case study - Elevate</title>
+        <title>Coverage metric - Elevate</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/font-awesome.min.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -39,14 +39,14 @@
                             <li class="navitem">
                                 <a href="../weaknesses/" class="nav-link">Weaknesses</a>
                             </li>
-                            <li class="navitem">
-                                <a href="../coverage/" class="nav-link">Coverage metric</a>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Coverage metric</a>
                             </li>
                             <li class="navitem">
                                 <a href="../effectiveness/" class="nav-link">Effectiveness</a>
                             </li>
-                            <li class="navitem active">
-                                <a href="./" class="nav-link">Case study</a>
+                            <li class="navitem">
+                                <a href="../case_study/" class="nav-link">Case study</a>
                             </li>
                         </ul>
 
@@ -57,12 +57,12 @@
                             </a>
                         </li>
                             <li class="nav-item">
-                                <a rel="prev" href="../effectiveness/" class="nav-link">
+                                <a rel="prev" href="../weaknesses/" class="nav-link">
                                     <i class="fa fa-arrow-left"></i> Previous
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" class="nav-link disabled">
+                                <a rel="next" href="../effectiveness/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -84,17 +84,25 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#case-study" class="nav-link">Case study</a>
+            <li class="nav-item" data-level="1"><a href="#coverage-metric" class="nav-link">Coverage metric</a>
               <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#case-1" class="nav-link">Case 1</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#case-2" class="nav-link">Case 2</a>
+            <li class="nav-item" data-level="2"><a href="#why-using-the-semantic-state-coverage-rate-as-metric" class="nav-link">Why using the semantic state coverage rate as metric?</a>
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#case-3" class="nav-link">Case 3</a>
+            <li class="nav-item" data-level="2"><a href="#why-using-observer-rather-than-human-inspection-as-the-ground-truth-of-semantic-states" class="nav-link">Why using Observer rather than human inspection as the ground-truth of semantic states?</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#other-metric-sentence-state" class="nav-link">Other metric: Sentence state</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#total-state-space-including-states-of-manual-testing" class="nav-link">Total state space: including states of manual testing</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#analyze-the-feature-of-state-space-achieved-by-elevate-vitas-and-manual-testing" class="nav-link">Analyze the feature of state space achieved by Elevate, Vitas and Manual testing</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -105,85 +113,46 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="case-study">Case study</h1>
-<p>In this case study, we select three real world cases of VPA apps.
-Each of the cases demonstrates the effectiveness of Elevate's one agent.</p>
-<h2 id="case-1">Case 1</h2>
-<p>This is an Alexa skill called Action movies.
-The skill's main functionality is to recommend different movies.
-Here is a piece of communication logs between Action movies and Elevate.</p>
-<pre><code class="language-text">Skill: Ok, Here's Action movies.Welcome to action movies. Do you want me to tell you a movie?
-Elevate: help
-Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
-Elevate: yes
-...
-Skill: Welcome to action movies. Do you want me to tell you a movie?
-Elevate: no
-</code></pre>
-<p>Below shows the recording of <strong>Observer</strong>'s prompts and outputs related to the above communication log.
-Only *Short Prompt* is displayed.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: sentence: &quot;Do you want me to tell you a movie?&quot;, state list: ['&lt;START&gt;']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
-Short Prompt:
-    Input: sentence: &quot;Do you want me to recommend a movie?&quot;, state list: ['&lt;START&gt;', 'Do you want me to tell you a movie?']
-    Output:
-Observer:
-    Do you want me to tell you a movie?
-</code></pre>
-<p>In this case, "Do you want me to tell you a movie?" and "Do you want me to recommend a movie?" are semantically similar outputs.
-Observer correctly maps the output "Do you want me to recommend a movie?" to an existing state "Do you want me to tell you a movie?".
-Therefore, Elevate recognizes the three skill's outputs as one state, so it uses different input events to efficiently trigger skill's different functionalities. </p>
-<h2 id="case-2">Case 2</h2>
-<p>This is an Alexa skill called Age Calculator.
-The skill's main functionality is to calculate the number of days between two dates.
-Here is a piece of communication logs between Age Calculator and Elevate.</p>
-<pre><code class="language-text">Skill: Handing off to Age Calculator by sayak.Age Calculator. You can ask me to calculate the amount of time between now and a specific date.What date would you like to use?
-Elevate: tommorrow
-Skill: The length of time between now and xxx is about xxx.
-...
-</code></pre>
-<p>Below shows the recording of <strong>Generator</strong>'s prompts and outputs related to the above communication log.
-Only *Short Prompt* is displayed.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: skill: &quot;What date would you like to use?&quot;
-    Output:
-Generator:
-    [&quot;today&quot;, &quot;tomorrow&quot;, &quot;July 4&quot;, &quot;December 25&quot;, &quot;next Monday&quot;]
-</code></pre>
-<p>The output "What date would you like to use?" expects a specifc date as inputs.
-Otherwise, this skill will return information like "I can only calculate based on exact dates.".
-Without domain-specifc knowledge of correct "date", invalid test cases will be generated.
-However, most NLP based testers have difficulty in generating valid test cases in such scenarios.
-As a comparison, Generator correctly generates five valid dates, benefited from the LLM.
-Therefore, Elevate's testing based on such high quality test cases is much more effective. </p>
-<h2 id="case-3">Case 3</h2>
-<p>This is an Alexa skill called Asthma Device Helper.
-The skill's main functionality is to provide usage instructions.
-Here is a piece of communication logs between Asthma Device Helper and Elevate.</p>
-<pre><code class="language-text">Skill: Welcome to Asthma Device Helper. You can ask a question like, what are the instructions for using a proair inhaler. ... Now, what can I help you with?
-Elevate: help
-Skill: You can ask questions such as, what's the instructions, or, you can say exit...Now, what can I help you with?
-Elevate: what are the instructions for using a proair inhaler
-Skill: When first using your proair inhaler...
-</code></pre>
-<p>Below shows the recording of <strong>Planner</strong>'s prompts and outputs related to the above communication log.</p>
-<pre><code class="language-text">Short Prompt:
-    Input: &lt;current state&gt;=&quot;You can ask questions such as, what's the instructions, or, you can say exit...&quot;,FSM={Σ={&quot;what's the instructions&quot;:0,&quot;exit&quot;:0,&quot;what are the instructions for using a proair inhaler&quot;:0,&quot;help&quot;:1,&quot;pause&quot;:0,&quot;resume&quot;:0,&quot;stop&quot;:0,&quot;what's the time&quot;:0},δ=([&lt;current_state&gt;,&quot;help&quot;,&lt;current_state&gt;])}.
-    Thought:
-Planner:
-    ...
-    Output: &quot;what are the instructions for using a proair inhaler&quot;
-</code></pre>
-<p>The state "You can ask questions such as, what's the instructions, or, you can say exit..." has many candidate input events, including semantic relevant inputs like "what's the instructions", "what are the instructions for using a proair inhaler" and "help", and semantic irrelevant inputs like "exit", "pause", "stop", etc..
-Planner considers the semantic relevance, history invocation times and transitions to make exploration decisions.
-Consequently, semantic irrelevant inputs have lower priority.
-Among semantic relevant inputs, "help" was chosen once and is invalid, so it is removed.
-From the left two choices, Planner selects "what are the instructions for using a proair inhaler" as the final input.
-Without considering semantic relevance, "exit" will have the same priority as "what are the instructions for using a proair inhaler" and "what's the instructions".
-If "exit" is selected, the skill will terminate, affecting the testing continuity.</p></div>
+<h1 id="coverage-metric">Coverage metric</h1>
+<h2 id="why-using-the-semantic-state-coverage-rate-as-metric">Why using the semantic state coverage rate as metric?</h2>
+<p>In Study 1, we compare the average semantic state coverage rate with varying interaction rounds between Elevate and baselines. 
+Semantic states are acquired by merging sentences with similar functionalities or behavior.
+Hence, the number of semantic states represents skill's distinct functionalities.
+Using semanic state coverage rate as a metric can better reflect testers' testing sufficiency.</p>
+<h2 id="why-using-observer-rather-than-human-inspection-as-the-ground-truth-of-semantic-states">Why using Observer rather than human inspection as the ground-truth of semantic states?</h2>
+<p>We calculate the accuracy of Observer in extracting semantic states on the benchmark.
+The accuracy for Observer's initial classfication is 88.1%.
+After the second check of the state filter, the accuracy increases to 97.5%.
+As it costs much labour and time to get the ground-truth of 4000 apps's semantic states, we use the semantic states classified by Observer as the metric.</p>
+<h2 id="other-metric-sentence-state">Other metric: Sentence state</h2>
+<p>To demonstrate that Elevate outperforms baselines under different metrics, we compare the average <strong>sentence state</strong> coverage rate with varying interaction rounds in this study. 
+The total state space is set as the unique sentence states achieved by Elevate and baselines. 
+The result is shown below.</p>
+<p><img alt="路径" src="../figure/study2_sentence.png" /></p>
+<p>Under the metric of sentence states, Elevate still achieves around 15% higher average coverage rate than Vitas in a more efficient manner.</p>
+<h2 id="total-state-space-including-states-of-manual-testing">Total state space: including states of manual testing</h2>
+<p>In our paper, the total state space is set as the unique semantic states achieved by Elevate and baselines.
+To get a more accurate total state space, we include the state space achieved by <strong>manual testing</strong> in this study.
+Then, the semantic state coverage rate with varying interaction rounds is compared between Elevate and baselines.
+The result is shown below.</p>
+<p><img alt="路径" src="../figure/study2_user_as_gt.png" /></p>
+<p>When manual testing results are considered in the total state space, only the denominator to calculate the semantic state coverage rate is changed.
+The performance of testers is almost the same as that shown in the study 1.
+Elevage still achieves an average coverage rate of nearly 70% and supasses baselines.</p>
+<h2 id="analyze-the-feature-of-state-space-achieved-by-elevate-vitas-and-manual-testing">Analyze the feature of state space achieved by Elevate, Vitas and Manual testing</h2>
+<p>If we take the manual testing results as a comparison, we can learn the similarity of Elevate and Vitas's behavior with the human tester.
+We draw the venn diagram to show the intersection state space between Elevate, Vitas and Manual testing.
+The text on each part represents the state space coverage rate when the unique states achieved by Elevate, Vitas and Manual testing is set as the total space.
+The result is shown below.</p>
+<p><img alt="路径" src="../figure/user_elevate_vitas.png" /></p>
+<p>Compared with Vitas, Elevate covers more state space discovered by manual testing, which proves that Elevate works more like a manual tester.
+This result is in line with our expectations, as Elevate's three agents commit to complementing the semantic loss during VUI testing.
+To further analyze the characteristics of states achieved by Elevate and Vitas, we extract meaningful states, which represent the normal behavior of skills.
+Meaningful states are extracted manually from the states achieved by Elevate and Vitas.
+The venn diagram of meaningful states coverage by Elevate and Vitas is shown below.</p>
+<p><img alt="路径" src="../figure/meaningful.png" /></p>
+<p>The figure demonstrate that Elevate achieves more meaningful states than Vitas. 
+It proves that input events generated by Elevate are more effective in exploring apps' functionalities.</p></div>
             </div>
         </div>
 

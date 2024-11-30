@@ -2,5 +2,7 @@ site_name: Elevate
 nav:
     - Home: index.md
     - Experiment: experiment.md
-    - Supporting results: supporting_results.md
+    - Weaknesses: weaknesses.md
+    - Coverage metric: coverage.md
+    - Effectiveness: effectiveness.md
     - Case study: case_study.md
