@@ -4,6 +4,7 @@ The first two cases reflect the effectiveness of Elevate's agent on problems det
 The last two cases show the limitation of Elevate.
 
 ## Case 1
+### **Generator** generates diverse and context-related inputs which benefit new states coverage and problems detection
 This is an Alexa skill called My Horoscope.
 The skill's main functionality is to show insights and forecasts.
 Here is a piece of communication log between My Horoscope and Elevate.
@@ -42,7 +43,8 @@ Consequently, Vitas cannot discover new states or problems after that.
 As a comparison, the **Generator** agent generates several context-related inputs (["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]) for this state , and the new state "Would you like to start your sevenday free trial?" is discovered.
 After that, the unexpected exit problem is found.
 
-## Case 2
+## Case 2 
+### **Observer** merges semantic similar outputs to avoid repeated tests, while **Planner** understands semantics to choose the best input
 This is an Alexa skill called Action movies.
 The skill's main functionality is to recommend different movies.
 Here is a piece of communication logs between Action movies and Elevate.
@@ -98,31 +100,39 @@ Secondly, semantic relevance is important when choosing inputs.
 This drawback is handled by **Planner**, who considers context-relevance and history testing results when making testing decisions. 
 
 ## Case 3
-This is an Alexa skill called Age Calculator.
-The skill's main functionality is to calculate the number of days between two dates.
-Here is a piece of communication logs between Age Calculator and Elevate.
+### Speeches in audio files are not adequately analyzed
+Elevate runs on the simulator, whose outputs are mostly in the form of text.
+However, in rare circumstances, the simulator returns an audio file and outputs the text <Short audio\>.
+Both Elevate and Vitas do not parse the audio files, but these files do contain information such as speeches or music.
+For example, a skill called Butterball only returns an audio file after launching.
+The log looks like:
 
 ```text
-Skill: Handing off to Age Calculator by sayak.Age Calculator. You can ask me to calculate the amount of time between now and a specific date.What date would you like to use?
-Elevate: tommorrow
-Skill: The length of time between now and xxx is about xxx.
-...
+Elevate/Vitas: Alexa open butterball
+Skill: <Short audio>.
+Elevate/Vitas: help
 ```
 
-Below shows the recording of **Generator**'s prompts and outputs related to the above communication log.
-Only \*Short Prompt\* is displayed.
+Actually, in the audio file, it says "Welcome back to butterball. I'm Beth. We can help you with planning, preparing, cooking or enjoying a turkey. What can I help with?".
+As Elevate and Vitas do not parse the audio file for text information, the context-related inputs ["planning a turkey", "preparing a turkey", "cooking a turkey", "enjoying a turkey"] cannot be generated.
+Meanwhile, Observer in Elevate and Vitas merge all audio files into one state because they are all in the text form <Short audio\>.
+As a result, the information embeded in the audio file is not adequately used, resulting in insufficient testing of subsequent behaviors.
+
+
+## Case 4
+### Music in audio files is not parsed
+Another example is a skill called Song Quiz.
+Its functionality is to randomly play music and ask users to guess the title and artist.
+The music is uploaded in an audio file.
+The simulator plays the audio file and returns the <Short audio\> text.
+There is the communication log betweeen Song Quiz and testers.
 
 ```text
-Short Prompt:
-    Input: skill: "What date would you like to use?"
-    Output:
-Generator:
-    ["today", "tomorrow", "July 4", "December 25", "next Monday"]
+Skill: Starting your 60s game.  Your opponent is Sam from Edinburgh.  I'll play 5 short clips. Guess the song title or artist, or you can guess both for bonus points.     Question 1 , for 10 points. Name the song title and artist:.<Short audio>.
+Elevate: shape of you by ed sheeran / Vitas: artist
 ```
 
-The output "What date would you like to use?" expects a specifc date as inputs.
-Otherwise, this skill will return information like "I can only calculate based on exact dates.".
-Without domain-specifc knowledge of correct "date", invalid test cases will be generated.
-However, most NLP based testers have difficulty in generating valid test cases in such scenarios.
-As a comparison, Generator correctly generates five valid dates, benefited from the LLM.
-Therefore, Elevate's testing based on such high quality test cases is much more effective. 
+In such cases, testers must understand the music to generate inputs, which is difficult for current VPA apps testers to handle.
+Although Elevate cannot analyze the audio file to get the correct answer, it can learn from the context to acquire the domain of answers.
+Consequently, its input is related to the song title and artist, although it is not the right one.
+As a comparison, Vitas just inputs "artist", which is not a valid answer.
