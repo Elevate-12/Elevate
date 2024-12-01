@@ -4,7 +4,7 @@
 The benchmark contains available and stable Alexa skills.
 However, they also suffer from problems including unexpected exit, privacy violation and unstoppable problems.
 While Elevate and baselines tested these skills, they recorded these problems.
-The number of weaknesses found by Elevate and baselines with time is shown below.
+The number of unique weaknesses found by Elevate and baselines with time is shown below.
 
 ![路径](figure/fse1_weakness_vs_time.png)
 
