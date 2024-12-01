@@ -49,7 +49,7 @@ The number of apps with various problems found by Elevate is shown below.
 | Smart_Home | 90 | 2 | 36 | 9 | 263 | 
 | Social | 85 | 5 | 5 | 14 | 72 | 
 | Sports | 22 | 1 | 0 | 7 | 30 | 
-| Travel_Transportation  61 | 2 | 7 | 3 | 44 | 
+| Travel_Transportation | 61 | 2 | 7 | 3 | 44 | 
 | Utilities | 81 | 5 | 7 | 9 | 47 | 
 | Weather | 46 | 3 | 3 | 4 | 20 | 
 | Total | 2008 | 81 | 134 | 194 | 1460 | 
