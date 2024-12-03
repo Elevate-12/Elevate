@@ -7,14 +7,25 @@ Semantic states are acquired by merging sentences with similar functionalities o
 Hence, the number of semantic states represents skill's distinct functionalities.
 Using semanic state coverage rate as a metric can better reflect testers' testing sufficiency.
 
-## Why using Observer rather than human inspection as the ground-truth of semantic states?
+## Why not using the sentence state coverage rate as metric?
 
-We calculate the accuracy of Observer in extracting semantic states on the benchmark.
-The accuracy for Observer's initial classfication is 88.1%.
-After the second check of the state filter, the accuracy increases to 97.5%.
-As it costs much labour and time to get the ground-truth of 4000 apps's semantic states, we use the semantic states classified by Observer as the metric.
+The sentence states are acquired by only merging outputs with the same content.
+However, VPA apps' outputs are in the form of natural language.
+It is common for them to express the same meaning using different expressions.
+Without merging these expressions, the state space can be largely redundant.
+To prove this, we compare the sentence state space and semantic state space achieved by Elevate, Vitas and GPT4(chatbot).
+The result is shown below.
 
-## Other metric: Sentence state
+![路径](figure/compression.png)
+
+We can see that all testers achieve more sentence states than semantic states.
+The semantic states are highly abstract, as each of them represents a distinct functionality.
+As a comparison, the number of sentence states is equal to the number of different sentences, which indeed contains much redundancy due to the lack of functionality distinction.
+The results demonstrate that the number of semantic states is more capable of reflecting the sufficiency of testing as our testing object is to test as many functionalities as possible.
+Using semantic states coverage as a guidance is more helpful in achieving this goal.
+Additionally, states size maintained by Elevate is greatly reduced by only recording semantic states.
+
+## What if we use other metrics like sentence states to evaluate the coverage and efficiency?
 To demonstrate that Elevate outperforms baselines under different metrics, we compare the average **sentence state** coverage rate with varying interaction rounds in this study. 
 The total state space is set as the unique sentence states achieved by Elevate and baselines. 
 The result is shown below.
@@ -22,6 +33,15 @@ The result is shown below.
 ![路径](figure/study2_sentence.png)
 
 Under the metric of sentence states, Elevate still achieves around 15% higher average coverage rate than Vitas in a more efficient manner.
+The advantage of Elevate over Vitas is less evident under this metric because Vitas was guided by the coverage of sentence states.
+Overall, the number of semantic states is propotional to the number of sentence states as semantic states are highly abstracted sentence states.
+
+## Why using Observer rather than human inspection as the ground-truth of semantic states?
+
+We calculate the accuracy of Observer in extracting semantic states on the benchmark.
+The accuracy for Observer's initial classfication is 88.1%.
+After the second check of the state filter, the accuracy increases to 97.5%.
+As it costs much labour and time to get the ground-truth of 4000 apps's semantic states, we use the semantic states classified by Observer as the metric.
 
 ## Total state space: including states of manual testing
 In our paper, the total state space is set as the unique semantic states achieved by Elevate and baselines.

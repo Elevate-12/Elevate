@@ -10,13 +10,14 @@ The number of unique weaknesses found by Elevate and baselines with time is show
 
 The number of weaknesses detected with time is proportional to the increase of the state space with interaction rounds.
 We notice that weaknesses found by Elevate are fewer than baselines in the first two minutes.
-The reason is that Generator tends to generate meaningful inputs and Planner prefers to choose the context-related input, which are closer to natural language (see [coverage features](coverage.md#analyze-the-feature-of-state-space-achieved-by-elevate-vitas-and-manual-testing)).
+The reason is that Generator tends to generate meaningful inputs and Planner prefers to choose the context-related input when first visiting a state.
+These inputs of Elevate are closer to the natural language (see [coverage features](coverage.md#analyze-the-feature-of-state-space-achieved-by-elevate-vitas-and-manual-testing)).
 These context-related inputs help us dig out skills' deeper behavior.
 After multiple rounds of effective interactions, Elevate can find more hidden problems.
 
-As a comparison, the inputs chose by baselines lack context relavance or the natural language format.
+As a comparison, the inputs chosen by baselines lack context relevance or the natural language format.
 As skills have difficulty understanding these inputs, they are more likely to expose problems.
-However, as these inputs cannot help find deeper functionalities, baselines continue to discover shallow problems repeatly.
+However, as these inputs cannot help find deeper functionalities, baselines continue to discover shallow problems repeatedly.
 What's more, as users rarely deliberately say strange words during use, problems found by baselines are less likely to happen in practice.
 
 

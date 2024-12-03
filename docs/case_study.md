@@ -108,16 +108,18 @@ For example, a skill called Butterball only returns an audio file after launchin
 The log looks like:
 
 ```text
-Elevate/Vitas: Alexa open butterball
+Elevate: Alexa open butterball
 Skill: <Short audio>.
-Elevate/Vitas: help
+Elevate: help
+Skill: Sounds like you want help. There are a few ways to get great Butterball turkey info. You can ask a question at any time, or you can say a topic that you'd like to learn about. Here are some topics to choose from: food allergies, grilling a turkey, or handling the neck and giblets. What would you like to do.
 ```
 
 Actually, in the audio file, it says "Welcome back to butterball. I'm Beth. We can help you with planning, preparing, cooking or enjoying a turkey. What can I help with?".
-As Elevate and Vitas do not parse the audio file for text information, the context-related inputs ["planning a turkey", "preparing a turkey", "cooking a turkey", "enjoying a turkey"] cannot be generated.
-Meanwhile, Observer in Elevate and Vitas merge all audio files into one state because they are all in the text form <Short audio\>.
-As a result, the information embeded in the audio file is not adequately used, resulting in insufficient testing of subsequent behaviors.
-
+As Elevate and Vitas do not parse the audio file, the context-related inputs ["planning a turkey", "preparing a turkey", "cooking a turkey", "enjoying a turkey"] cannot be generated.
+However, Elevate can learn from other outputs to acquire related inputs.
+By sending "help", Elevate triggered the recommended inputs offered by the skill.
+The testing can be continued using these inputs.
+In conclusion, Elevate compenstate for this drawback by learning from other outputs to guess the domain of accepted inputs.
 
 ## Case 4
 ### Music in audio files is not parsed

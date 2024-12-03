@@ -6,8 +6,8 @@ All agents work around the behavior model.
 Consequently, taking behavior model as the input is the requirement of tasks.
 If there is no behavior model guidance, the LLM will degenerate into a chatbot style tester.
 To prove the effectiveness of embedding the behavior model into prompts, we compare GPT-4 with and without behavior model as prompt. 
-GPT-4 without behavior model is represented as GPT4(chatbot), and GPT-4 with behavior model in prompts is represented as GPT4(behavior_model).
-The semantic state coverage rate acquired by GPT4(chatbot), GPT4(behavior_model) and Vitas is shown below.
+GPT-4 without behavior model is represented as GPT4(chatbot), and GPT-4 with behavior model in prompts is represented as GPT4(chatbot)+model.
+The semantic state coverage rate acquired by GPT4(chatbot), GPT4(chatbot)+model and Vitas is shown below.
 
 ![路径](figure/fse3_gpt4_w_wo_bm.png)
 
