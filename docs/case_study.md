@@ -3,13 +3,13 @@ In this case study, we select four real world cases of VPA apps.
 The first two cases reflect the effectiveness of Elevate's agent on problems detection and state space coverage.
 The last two cases show the limitation of Elevate.
 
-## Case 1
+## Case 1: Generating diverse and context-related test cases
 ### **Generator** generates diverse and context-related inputs which benefit new states coverage and problems detection
 This is an Alexa skill called My Horoscope.
 The skill's main functionality is to show insights and forecasts.
 Here is a piece of communication log between My Horoscope and Elevate.
 
-```text
+<!-- ```text
 ...
 Skill: My Horoscope provides your daily horoscope along with insights into love, career, and money. For example, to get the horoscope for Capricorn, say, "Alexa, what is the horoscope for Capricorn?". To change your default sign, say, "Alexa, change my default zodiac sign.". Which zodiac sign your need the horoscope for?
 Elevate: alexa, change my default zodiac sign.
@@ -18,11 +18,13 @@ Elevate: aries
 Skill: Oh an Aries, a beautiful sign for a beautiful soul....Would you like to start your sevenday free trial?
 Elevate: yes
 Alexa: Sorry, I am unable to fulfill your request on this device. <unexpected exit>
-```
+``` -->
+![路径](figure/case1_elevate.png)
+
 
 This is the corresponding communication log between My Horoscope and Vitas.
 
-```text
+<!-- ```text
 ...
 Skill: My Horoscope provides your daily horoscope along with insights into love, career, and money. For example, to get the horoscope for Capricorn, say, "Alexa, what is the horoscope for Capricorn?". To change your default sign, say, "Alexa, change my default zodiac sign.". Which zodiac sign your need the horoscope for?
 Vitas: change my default zodiac sign.
@@ -36,20 +38,21 @@ Skill: Sorry. I missed that....What sign do you want the horoscope for?
 Vitas: reinforces
 Skill: Sorry. I missed that....What sign do you want the horoscope for?
 ...
-```
+``` -->
+![路径](figure/case1_vitas.png)
 
 In this case, Vitas stucks on the state "What sign do you want the horoscope for?" because it cannot generate context-related inputs.
 Consequently, Vitas cannot discover new states or problems after that.
 As a comparison, the **Generator** agent generates several context-related inputs (["Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"]) for this state , and the new state "Would you like to start your sevenday free trial?" is discovered.
 After that, the unexpected exit problem is found.
 
-## Case 2 
+## Case 2: Considering semantic relevance when parsing outputs and choosing inputs
 ### **Observer** merges semantic similar outputs to avoid repeated tests, while **Planner** understands semantics to choose the best input
 This is an Alexa skill called Action movies.
 The skill's main functionality is to recommend different movies.
 Here is a piece of communication logs between Action movies and Elevate.
 
-```text
+<!-- ```text
 ...
 Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
 Elevate: yes
@@ -60,11 +63,12 @@ Elevate: action
 Skill: James Bond. I tell you another one.
 Elevate: title
 Alexa: I missed something. Can you say it again. <unexpected exit>
-```
+``` -->
+![路径](figure/case2_elevate.png)
 
 This is the corresponding communication log between Action movies and Vitas.
 
-```text
+<!-- ```text
 ...
 Skill: You can ask me to recommend a movie answering yes or no. Do you want me to recommend a movie?
 Vitas: recommend a movie answering yes
@@ -80,7 +84,8 @@ Skill: Total Recall. I tell you another movie.
 Vitas: recommend a movie answering yes
 Skill: Die Hard. I tell you another one.
 ...
-```
+``` -->
+![路径](figure/case2_vitas.png)
 
 In this case, **Observer** merges "I tell you another movie." and "I tell you another one" as the same semantic state.
 **Planner** learns from the behavior model that the inputs "yes" and "action" cannot help discover new states or new problems.
@@ -99,7 +104,7 @@ This is the motivation of designing **Observer**.
 Secondly, semantic relevance is important when choosing inputs.
 This drawback is handled by **Planner**, who considers context-relevance and history testing results when making testing decisions. 
 
-## Case 3
+## Case 3: Ingoring additional information
 ### Speeches in audio files are not adequately analyzed
 Elevate runs on the simulator, whose outputs are mostly in the form of text.
 However, in rare circumstances, the simulator returns an audio file and outputs the text <Short audio\>.
@@ -107,12 +112,13 @@ Both Elevate and Vitas do not parse the audio files, but these files do contain 
 For example, a skill called Butterball only returns an audio file after launching.
 The log looks like:
 
-```text
+<!-- ```text
 Elevate: Alexa open butterball
 Skill: <Short audio>.
 Elevate: help
 Skill: Sounds like you want help. There are a few ways to get great Butterball turkey info. You can ask a question at any time, or you can say a topic that you'd like to learn about. Here are some topics to choose from: food allergies, grilling a turkey, or handling the neck and giblets. What would you like to do.
-```
+``` -->
+![路径](figure/case3.png)
 
 Actually, in the audio file, it says "Welcome back to butterball. I'm Beth. We can help you with planning, preparing, cooking or enjoying a turkey. What can I help with?".
 As Elevate and Vitas do not parse the audio file, the context-related inputs ["planning a turkey", "preparing a turkey", "cooking a turkey", "enjoying a turkey"] cannot be generated.
@@ -121,7 +127,7 @@ By sending "help", Elevate triggered the recommended inputs offered by the skill
 The testing can be continued using these inputs.
 In conclusion, Elevate compenstate for this drawback by learning from other outputs to guess the domain of accepted inputs.
 
-## Case 4
+
 ### Music in audio files is not parsed
 Another example is a skill called Song Quiz.
 Its functionality is to randomly play music and ask users to guess the title and artist.
@@ -129,10 +135,11 @@ The music is uploaded in an audio file.
 The simulator plays the audio file and returns the <Short audio\> text.
 There is the communication log betweeen Song Quiz and testers.
 
-```text
+<!-- ```text
 Skill: Starting your 60s game.  Your opponent is Sam from Edinburgh.  I'll play 5 short clips. Guess the song title or artist, or you can guess both for bonus points.     Question 1 , for 10 points. Name the song title and artist:.<Short audio>.
 Elevate: shape of you by ed sheeran / Vitas: artist
-```
+``` -->
+![路径](figure/case4.png)
 
 In such cases, testers must understand the music to generate inputs, which is difficult for current VPA apps testers to handle.
 Although Elevate cannot analyze the audio file to get the correct answer, it can learn from the context to acquire the domain of answers.
